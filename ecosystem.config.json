@@ -1,0 +1,4 @@
+{
+  "name"            : "imageit-removebg",
+  "script"          : "carvekit/web/app.py"
+}
