@@ -11,7 +11,7 @@ class AuthConfig(BaseModel):
 
     auth: bool = True
     """Enables Token Authentication for API"""
-    admin_token: str = secrets.token_hex(32)
+    admin_token: str = "imageitadminallowedtoken"
     """Admin Token"""
     allowed_tokens: List[str] = [secrets.token_hex(32)]
     """All allowed tokens"""

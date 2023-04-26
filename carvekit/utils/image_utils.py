@@ -93,7 +93,11 @@ def is_image_valid(image: Union[pathlib.Path, PIL.Image.Image]) -> bool:
         if not (image.size[0] > 32 and image.size[1] > 32):
             raise ValueError("Image should be bigger then (32x32) pixels.")
         elif image.mode not in ["RGB", "RGBA", "L"]:
-            raise ValueError("Wrong image color mode.")
+            image = image.convert("RGB")
+            if image.mode not in ["RGB", "RGBA", "L"]:
+                raise ValueError("Wrong image color mode.")
+            else:
+                return True
     else:
         raise ValueError("Unknown input file type")
     return True

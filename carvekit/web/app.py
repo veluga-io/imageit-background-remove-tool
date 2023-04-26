@@ -1,9 +1,15 @@
 from pathlib import Path
 
 import uvicorn
+import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
+
+__dir__ = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(__dir__)
+sys.path.append(os.path.abspath(os.path.join(__dir__, '../../')))
 
 from carvekit import version
 from carvekit.web.deps import config

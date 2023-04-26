@@ -35,7 +35,8 @@ def init_config() -> WebAPIConfig:
                     "CARVEKIT_POSTPROCESSING_METHOD",
                     default_config.ml.postprocessing_method,
                 ),
-                device=getenv("CARVEKIT_DEVICE", default_config.ml.device),
+                #device=getenv("CARVEKIT_DEVICE", default_config.ml.device),
+                device="cuda",
                 batch_size_seg=int(
                     getenv("CARVEKIT_BATCH_SIZE_SEG", default_config.ml.batch_size_seg)
                 ),
@@ -74,15 +75,19 @@ def init_config() -> WebAPIConfig:
                 auth=bool(
                     int(getenv("CARVEKIT_AUTH_ENABLE", default_config.auth.auth))
                 ),
-                admin_token=getenv(
-                    "CARVEKIT_ADMIN_TOKEN", default_config.auth.admin_token
-                ),
+                admin_token="imageitadminallowedtoken",
+                #admin_token=getenv(
+                #    "CARVEKIT_ADMIN_TOKEN", default_config.auth.admin_token
+                #),
                 allowed_tokens=default_config.auth.allowed_tokens
                 if getenv("CARVEKIT_ALLOWED_TOKENS") is None
                 else getenv("CARVEKIT_ALLOWED_TOKENS").split(","),
             ),
         )
     )
+
+    print('12312312123')
+    print(f'config: {config}')
 
     logger.info(f"Admin token for Web API is {config.auth.admin_token}")
     logger.debug(f"Running Web API with this config: {config.json()}")
